@@ -12,18 +12,21 @@ namespace Platformer.View
         /// Movement of the layer is scaled by this value.
         /// </summary>
         public Vector3 movementScale = Vector3.one;
+        public bool staticY;
+        private float startY;
 
         Transform _camera;
 
         void Awake()
         {
             _camera = Camera.main.transform;
+            startY = transform.position.y;
         }
 
         void LateUpdate()
         {
             transform.position = Vector3.Scale(_camera.position, movementScale);
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+            transform.position = new Vector3(transform.position.x, staticY? startY: transform.position.y, 0);
         }
 
     }

@@ -57,10 +57,16 @@ public class Lever : MonoBehaviour
 
     public void Interact()
     {
+        GetComponent<AudioSource>().pitch = isOn ? 1 : 0.7f;
+        GetComponent<AudioSource>().Play();
         switch (leverID)
         {
             case 1:
                 piston.enabled = !piston.enabled;
+                foreach (RotatingObject rotatingObject in rotatingObjects)
+                {
+                    rotatingObject.isRotating = !rotatingObject.isRotating;
+                }
                 break;
             case 2:
                 piston.enabled = !piston.enabled;
